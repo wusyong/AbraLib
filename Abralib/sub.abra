@@ -1,0 +1,25 @@
+import AbraLib/types
+
+import AbraLib/add
+import AbraLib/neg
+
+// implement subtraction by adding the negative value
+// exploits that A - B is equivalent to A + (-B)
+
+// note that we can also copy the entire add functionality
+// and replace the halfAdd LUT with one that has the second
+// trit column negated which ends up in more efficient code
+// because we don't have to do the negate before adding
+
+template subFunc<T> add<T> (lhs [T], rhs [T]) = {
+  add<T>(lhs, neg<T>(rhs)0);
+}
+
+subFunc<Tryte>;
+subFunc<Tiny>;
+subFunc<Int>;
+subFunc<Huge>;
+subFunc<Hash>;
+subFunc<Hash3>;
+subFunc<Hash9>;
+subFunc<Signature>;

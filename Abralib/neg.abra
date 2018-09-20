@@ -1,0 +1,28 @@
+import AbraLib/types
+
+// LUT logic: return the negative value of the input trit
+//            return -trit1;
+// note that making an entire trit-vector's value negative
+// can be done by simply negating every trit in the vector
+neg [
+  - = 1;
+  0 = 0;
+  1 = -;
+];
+
+negTrit (val [Trit]) = neg[val];
+
+template negFunc<T, P> neg<T> (val [T]) = {
+  neg<P>(val[0 * P..]),
+  neg<P>(val[1 * P..]),
+  neg<P>(val[2 * P..]);
+}
+
+negFunc<Tryte, Trit>;
+negFunc<Tiny, Tryte>;
+negFunc<Int, Tiny>;
+negFunc<Huge, Int>;
+negFunc<Hash, Huge>;
+negFunc<Hash3, Hash>;
+negFunc<Hash9, Hash3>;
+negFunc<Signature, Hash9>;

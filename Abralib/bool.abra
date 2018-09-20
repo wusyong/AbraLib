@@ -1,0 +1,62 @@
+// ************* BOOLEAN OPERATORS *************
+
+// LUT logic: binary NOT
+//            return !trit1;
+not [
+  0 = 1;
+  1 = 0;
+];
+
+// LUT logic: binary AND
+//            return (trit1 & trit2);
+and [
+  0,0 = 0;
+  0,1 = 0;
+  1,0 = 0;
+  1,1 = 1;
+];
+
+// LUT logic: binary OR
+//            return (trit1 | trit2);
+or [
+  0,0 = 0;
+  0,1 = 1;
+  1,0 = 1;
+  1,1 = 1;
+];
+
+// LUT logic: binary XOR
+//            return (trit1 ^ trit2);
+xor [
+  0,0 = 0;
+  0,1 = 1;
+  1,0 = 1;
+  1,1 = 0;
+];
+
+// LUT logic: binary NAND
+//            return !(trit1 & trit2);
+nand [
+  0,0 = 1;
+  0,1 = 1;
+  1,0 = 1;
+  1,1 = 0;
+];
+
+// LUT logic: binary NOR
+//            return !(trit1 | trit2);
+nor [
+  0,0 = 1;
+  0,1 = 0;
+  1,0 = 0;
+  1,1 = 0;
+];
+
+// LUT logic: binary XNOR
+//            return !(trit1 ^ trit2);
+xnor [
+  0,0 = 1;
+  0,1 = 0;
+  1,0 = 0;
+  1,1 = 1;
+];

@@ -1,0 +1,80 @@
+import AbraLib/types
+import AbraLib/bool
+
+// LUT logic: return a Bool trit indicating whether the two input trits are equal
+//            return (trit1 == trit2);
+equal [
+  -,- = 1;
+  -,0 = 0;
+  -,1 = 0;
+  0,- = 0;
+  0,0 = 1;
+  0,1 = 0;
+  1,- = 0;
+  1,0 = 0;
+  1,1 = 1;
+];
+
+equalTrit(lhs [Trit], rhs [Trit]) = equal[lhs, rhs];
+
+equalTryte(lhs [Tryte], rhs [Tryte]) = {
+  and[equalTrit(lhs[0 * Trit..], rhs[0 * Trit..]),
+      and[equalTrit(lhs[1 * Trit..], rhs[1 * Trit..]),
+          equalTrit(lhs[2 * Trit..], rhs[2 * Trit..])
+      ]
+  ];
+};
+
+equalTiny(lhs [Tiny], rhs [Tiny]) = {
+  and[equalTryte(lhs[0 * Tryte..], rhs[0 * Tryte..]),
+      and[equalTryte(lhs[1 * Tryte..], rhs[1 * Tryte..]),
+          equalTryte(lhs[2 * Tryte..], rhs[2 * Tryte..])
+      ]
+  ];
+};
+
+equalInt(lhs [Int], rhs [Int]) = {
+  and[equalTiny(lhs[0 * Tiny..], rhs[0 * Tiny..]),
+      and[equalTiny(lhs[1 * Tiny..], rhs[1 * Tiny..]),
+          equalTiny(lhs[2 * Tiny..], rhs[2 * Tiny..])
+      ]
+  ];
+};
+
+equalHuge(lhs [Huge], rhs [Huge]) = {
+  and[equalInt(lhs[0 * Int..], rhs[0 * Int..]),
+      and[equalInt(lhs[1 * Int..], rhs[1 * Int..]),
+          equalInt(lhs[2 * Int..], rhs[2 * Int..])
+      ]
+  ];
+};
+
+equalHash(lhs [Hash], rhs [Hash]) = {
+  and[equalHuge(lhs[0 * Huge..], rhs[0 * Huge..]),
+      and[equalHuge(lhs[1 * Huge..], rhs[1 * Huge..]),
+          equalHuge(lhs[2 * Huge..], rhs[2 * Huge..])
+      ]
+  ];
+};
+
+// ... etc...
+
+
+// possible future template functionality to reduce all the above copy-pasta
+
+// template equalFunc<T, P> equal<T>(lhs [T], rhs [T]) = {
+//   and[equal<P>(lhs[0 * P..], rhs[0 * P..]),
+//       and[equal<P>(lhs[1 * P..], rhs[1 * P..]),
+//           equal<P>(lhs[2 * P..], rhs[2 * P..])
+//       ]
+//   ];
+// };
+//
+// equalFunc<Tryte, Trit>;
+// equalFunc<Tiny, Tryte>;
+// equalFunc<Int, Tiny>;
+// equalFunc<Huge, Int>;
+// equalFunc<Hash, Huge>;
+// equalFunc<Hash3, Hash>;
+// equalFunc<Hash9, Hash3>;
+// equalFunc<Signature, Hash9>;

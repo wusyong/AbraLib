@@ -1,0 +1,19 @@
+import AbraLib/types
+
+import AbraLib/fulladd
+
+template addFunc<T> add<T> (lhs [T], rhs [T]) = {
+  // use full adder but don't return the carry trit
+  sum = fullAdd<T>(lhs, rhs, 0);
+  sum[1..];
+}
+
+addFunc<Trit>;
+addFunc<Tryte>;
+addFunc<Tiny>;
+addFunc<Int>;
+addFunc<Huge>;
+addFunc<Hash>;
+addFunc<Hash3>;
+addFunc<Hash9>;
+addFunc<Signature>;

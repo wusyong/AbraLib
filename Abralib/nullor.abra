@@ -1,0 +1,103 @@
+import AbraLib/types
+
+// LUT logic: return the 2rd input trit only when 1st input trit equals 1 (true)
+//            return (trit1 == 1) ? trit2 : null;
+nullOrValue [
+  1,- = -;
+  1,0 = 0;
+  1,1 = 1;
+];
+
+
+// construct functions for all predefined types that perform
+// a similar task to the nullOrTrit LUT for those larger types
+// note that we have defined each successive type a factor 3 times bigger
+// which means we can easily define each successive type in terms of the previous one
+
+// every nullOrXxx function returns <val> when <t> equals 1 (true), and null otherwise
+
+// note that it may seem wasteful to define it this way, but when mapped to FPGA
+// these can be translated into parallel circuitry that executes them simultaneously.
+// for other architectures, Abra will allow the Abra functions to be replaced with
+// a dll function that uses optimal architecture-specific instructions.
+// we expect a library of common functions to be developed over time
+
+nullOrTrit(t [Bool], val [Trit]) = nullOrValue[t, val];
+
+nullOrTryte(t [Bool], val [Tryte]) = {
+  // concatenate the 3 separate trits via the LUT
+  nullOrValue[t, val[0]],
+  nullOrValue[t, val[1]],
+  nullOrValue[t, val[2]];
+};
+
+nullOrTiny(t [Bool], val [Tiny]) = {
+  // concatenate the 3 separate trytes via the previous function
+
+  // note the notation to easily specify a subrange of a trit vector
+  // we will start at N times the size of Tryte and have an open ended range
+  // which specifies to take whatever amount necessary to pass to the underlying parameter
+  nullOrTryte(t, val[0 * Tryte..]),
+  nullOrTryte(t, val[1 * Tryte..]),
+  nullOrTryte(t, val[2 * Tryte..]);
+};
+
+nullOrInt(t [Bool], val [Int]) = {
+  // concatenate the 3 separate shorts via the previous function
+  nullOrTiny(t, val[0 * Tiny..]),
+  nullOrTiny(t, val[1 * Tiny..]),
+  nullOrTiny(t, val[2 * Tiny..]);
+};
+
+nullOrHuge(t [Bool], val [Huge]) = {
+  // concatenate the 3 separate ints via the previous function
+  nullOrInt(t, val[0 * Int..]),
+  nullOrInt(t, val[1 * Int..]),
+  nullOrInt(t, val[2 * Int..]);
+};
+
+nullOrHash(t [Bool], val [Hash]) = {
+  // concatenate the 3 separate longs via the previous function
+  nullOrHuge(t, val[0 * Huge..]),
+  nullOrHuge(t, val[1 * Huge..]),
+  nullOrHuge(t, val[2 * Huge..]);
+};
+
+nullOrState(t [Bool], val [State]) = {
+  // concatenate the 3 separate hashes via the previous function
+  nullOrHash(t, val[0 * Hash..]),
+  nullOrHash(t, val[1 * Hash..]),
+  nullOrHash(t, val[2 * Hash..]);
+};
+
+nullOrSignature(t [Bool], val [Signature]) = {
+  // signature is 27 hashes or 9 states
+  // concatenate 9 separate states via the previous function
+  nullOrState(t, val[0 * State..]),
+  nullOrState(t, val[1 * State..]),
+  nullOrState(t, val[2 * State..]),
+  nullOrState(t, val[3 * State..]),
+  nullOrState(t, val[4 * State..]),
+  nullOrState(t, val[5 * State..]),
+  nullOrState(t, val[6 * State..]),
+  nullOrState(t, val[7 * State..]),
+  nullOrState(t, val[8 * State..]);
+};
+
+// possible future template functionality to reduce all the above copy-pasta?
+
+// template nullOrFunc<T, P> nullOr<T> (t [Bool], val [T]) = {
+//   // concatenate the 3 separate parts via the part-specific function
+//   nullOr<P>(t, val[0 * P..]),
+//   nullOr<P>(t, val[1 * P..]),
+//   nullOr<P>(t, val[2 * P..]);
+// };
+//
+// nullOrFunc<Tryte, Trit>;
+// nullOrFunc<Tiny, Tryte>;
+// nullOrFunc<Int, Tiny>;
+// nullOrFunc<Huge, Int>;
+// nullOrFunc<Hash, Huge>;
+// nullOrFunc<Hash3, Hash>;
+// nullOrFunc<Hash9, Hash3>;
+// nullOrFunc<Signature, Hash9>;

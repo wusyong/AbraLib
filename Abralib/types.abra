@@ -1,0 +1,46 @@
+// define some standard trit lengths we will use in our examples
+// note that you can define the optimal trit size for any type's
+// range to reduce energy requirements accordingly, but for
+// simplicity we'll only define power-of-3 sized types for now
+Trit [1];             // -1 to +1
+Tryte [3];            // -13 to +13
+Tiny [9];             // -9,841 to +9,841
+Int [27];             // -3,812,798,742,493 to +3,812,798,742,493
+Huge [81];            // -2.217...e+38 to +2.217...e+38
+Hash [243];           // standard 81 trytes hash value
+Hash3 [3 * Hash];
+Hash9 [9 * Hash];
+Signature [27 * Hash];
+
+// define a convenience type to make code more readable
+// should always be a binary boolean value 0 (false) or 1 (true)
+// should never be null or assume the value -
+// (note: this convention is not enforced by Abra)
+Bool [Trit];
+
+
+// here's how to define a named structured trit vector
+// it consists of the concatenation of all sub-vectors
+// its total size is the sum of all sub-vector sizes
+// note that strctures can contain structures
+
+// IOTA transaction layout
+Transaction {
+  signature [Signature];
+  extraDataDigest [Hash];
+  address [Hash];
+  value [Huge];
+  issuanceTimestamp [Int];
+  timelockLowerBound [Int];
+  timelockUpperBound [Int];
+  bundle [Huge];
+  trunk [Hash];
+  branch [Hash];
+  tag [Huge];
+  attachment {
+    timestamp [Int];
+    timestampLowerBound [Int];
+    timestampUpperBound [Int];
+  };
+  nonce [Huge];
+};

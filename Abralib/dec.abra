@@ -1,0 +1,18 @@
+import AbraLib/types
+
+import AbraLib/halfadd
+
+template decFunc<T> dec<T> (val [T]) = {
+  halfSum = halfAdd<T>(val, -);
+  halfSum[1..];
+}
+
+decFunc<Trit>;
+decFunc<Tryte>;
+decFunc<Tiny>;
+decFunc<Int>;
+decFunc<Huge>;
+decFunc<Hash>;
+decFunc<Hash3>;
+decFunc<Hash9>;
+decFunc<Signature>;

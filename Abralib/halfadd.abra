@@ -1,0 +1,33 @@
+import AbraLib/types
+
+// LUT logic: return the sum of a trit plus a carry as a single trit plus a new carry
+//            return newcarry(trit1 + carry), (trit1 + carry);
+halfAdd [
+  -,- = -,1;
+  -,0 = 0,-;
+  -,1 = 0,0;
+  0,- = 0,-;
+  0,0 = 0,0;
+  0,1 = 0,1;
+  1,- = 0,0;
+  1,0 = 0,1;
+  1,1 = 1,-;
+];
+
+halfAddTrit (val [Trit], carry [Trit]) = halfAdd[val, carry];
+
+template halfAddFunc<T, P> halfAdd<T> (lhs [T], carry [Trit]) = {
+  add0 = halfAdd<P>(lhs[P * 0..], carry);
+  add1 = halfAdd<P>(lhs[P * 1..], add0[0]);
+  add2 = halfAdd<P>(lhs[P * 2..], add1[0]);
+  add2[0], add0[1..], add1[1..], add2[1..];
+}
+
+halfAddFunc<Tryte, Trit>;
+halfAddFunc<Tiny, Tryte>;
+halfAddFunc<Int, Tiny>;
+halfAddFunc<Huge, Int>;
+halfAddFunc<Hash, Huge>;
+halfAddFunc<Hash3, Hash>;
+halfAddFunc<Hash9, Hash3>;
+halfAddFunc<Signature, Hash9>;
