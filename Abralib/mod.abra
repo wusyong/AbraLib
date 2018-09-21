@@ -1,0 +1,14 @@
+import AbraLib/types;
+
+import AbraLib/divmod;
+
+template modFunc<T> [T] mod<T> (lhs [T * 2], rhs [T]) = {
+  ret = divmod<T>(lhs, rhs);
+  return ret[T..];
+};
+
+use modFunc<Trit>;
+use modFunc<Tryte>;
+use modFunc<Tiny>;
+use modFunc<Int>;
+use modFunc<Huge>;

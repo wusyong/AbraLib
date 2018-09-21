@@ -1,0 +1,22 @@
+import AbraLib;
+
+// returns the n-th Fibonacci number
+// Java equivalent:
+// return (n == 0 || n == 1) ? n : (fib(n - 1) + fib(n - 2));
+
+func [Int] fibonacci (n [Int]) = {
+
+  // check if n equals 0 or 1, which means return n
+  retN = or[equal<Int>(n, 0), equal<Int>(n, 1)];
+
+  // use null in recursion case when n was 0 or 1
+  altN = nullOr<Int>(not[retN], n);
+
+  // calculate n - 1 for recursion case
+  nMin1 = dec<Int>(altN);
+
+  // calculate n - 2 for recursion case
+  nMin2 = dec<Int>(nMin1);
+
+  return nullOr<Int>(retN, n) \ add<Int>(fibonacci(nMin1), fibonacci(nMin2));
+};

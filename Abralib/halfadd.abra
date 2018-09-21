@@ -1,8 +1,8 @@
-import AbraLib/types
+import AbraLib/types;
 
 // LUT logic: return the sum of a trit plus a carry as a single trit plus a new carry
 //            return newcarry(trit1 + carry), (trit1 + carry);
-halfAdd [
+lut halfAdd [
   -,- = -,1;
   -,0 = 0,-;
   -,1 = 0,0;
@@ -14,20 +14,20 @@ halfAdd [
   1,1 = 1,-;
 ];
 
-halfAddTrit (val [Trit], carry [Trit]) = halfAdd[val, carry];
+func [Trit + 1] halfAdd<Trit> (val [Trit], carry [Trit]) = halfAdd[val, carry];
 
-template halfAddFunc<T, P> halfAdd<T> (lhs [T], carry [Trit]) = {
-  add0 = halfAdd<P>(lhs[P * 0..], carry);
-  add1 = halfAdd<P>(lhs[P * 1..], add0[0]);
-  add2 = halfAdd<P>(lhs[P * 2..], add1[0]);
-  add2[0], add0[1..], add1[1..], add2[1..];
-}
+template halfAddFunc<T, P> [T + 1] halfAdd<T> (val [T], carry [Trit]) = {
+  add0 = halfAdd<P>(val[P * 0..1 * P - 1], carry);
+  add1 = halfAdd<P>(val[P * 1..2 * P - 1], add0[0]);
+  add2 = halfAdd<P>(val[P * 2..3 * P - 1], add1[1]);
+  return add2[0] & add0[1..] & add1[1..] & add2[1..];
+};
 
-halfAddFunc<Tryte, Trit>;
-halfAddFunc<Tiny, Tryte>;
-halfAddFunc<Int, Tiny>;
-halfAddFunc<Huge, Int>;
-halfAddFunc<Hash, Huge>;
-halfAddFunc<Hash3, Hash>;
-halfAddFunc<Hash9, Hash3>;
-halfAddFunc<Signature, Hash9>;
+use halfAddFunc<Tryte, Trit>;
+use halfAddFunc<Tiny, Tryte>;
+use halfAddFunc<Int, Tiny>;
+use halfAddFunc<Huge, Int>;
+use halfAddFunc<Hash, Huge>;
+use halfAddFunc<Hash3, Hash>;
+use halfAddFunc<Hash9, Hash3>;
+use halfAddFunc<Signature, Hash9>;

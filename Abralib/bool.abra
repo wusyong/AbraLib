@@ -2,14 +2,14 @@
 
 // LUT logic: binary NOT
 //            return !trit1;
-not [
+lut not [
   0 = 1;
   1 = 0;
 ];
 
 // LUT logic: binary AND
 //            return (trit1 & trit2);
-and [
+lut and [
   0,0 = 0;
   0,1 = 0;
   1,0 = 0;
@@ -18,7 +18,7 @@ and [
 
 // LUT logic: binary OR
 //            return (trit1 | trit2);
-or [
+lut or [
   0,0 = 0;
   0,1 = 1;
   1,0 = 1;
@@ -27,7 +27,7 @@ or [
 
 // LUT logic: binary XOR
 //            return (trit1 ^ trit2);
-xor [
+lut xor [
   0,0 = 0;
   0,1 = 1;
   1,0 = 1;
@@ -36,7 +36,7 @@ xor [
 
 // LUT logic: binary NAND
 //            return !(trit1 & trit2);
-nand [
+lut nand [
   0,0 = 1;
   0,1 = 1;
   1,0 = 1;
@@ -45,7 +45,7 @@ nand [
 
 // LUT logic: binary NOR
 //            return !(trit1 | trit2);
-nor [
+lut nor [
   0,0 = 1;
   0,1 = 0;
   1,0 = 0;
@@ -54,7 +54,7 @@ nor [
 
 // LUT logic: binary XNOR
 //            return !(trit1 ^ trit2);
-xnor [
+lut xnor [
   0,0 = 1;
   0,1 = 0;
   1,0 = 0;

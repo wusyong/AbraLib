@@ -1,7 +1,7 @@
-import AbraLib/types
+import AbraLib/types;
 
-import AbraLib/add
-import AbraLib/neg
+import AbraLib/fullAdd;
+import AbraLib/neg;
 
 // implement subtraction by adding the negative value
 // exploits that A - B is equivalent to A + (-B)
@@ -11,15 +11,24 @@ import AbraLib/neg
 // trit column negated which ends up in more efficient code
 // because we don't have to do the negate before adding
 
-template subFunc<T> add<T> (lhs [T], rhs [T]) = {
-  add<T>(lhs, neg<T>(rhs)0);
-}
+template subFunc<T> [T] sub<T> (lhs [T], rhs [T]) = {
+  // use full adder but don't return the carry trit
+  sum = fullAdd<T>(lhs, neg<T>(rhs), 0);
+  return sum[1..];
+};
 
-subFunc<Tryte>;
-subFunc<Tiny>;
-subFunc<Int>;
-subFunc<Huge>;
-subFunc<Hash>;
-subFunc<Hash3>;
-subFunc<Hash9>;
-subFunc<Signature>;
+use subFunc<Trit>;
+use subFunc<Tryte>;
+use subFunc<Tiny>;
+use subFunc<Int>;
+use subFunc<Huge>;
+use subFunc<Hash>;
+use subFunc<Hash3>;
+use subFunc<Hash9>;
+use subFunc<Signature>;
+
+use subFunc<Trit2>;
+use subFunc<Tryte2>;
+use subFunc<Tiny2>;
+use subFunc<Int2>;
+use subFunc<Huge2>;

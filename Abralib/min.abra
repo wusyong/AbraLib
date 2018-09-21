@@ -1,0 +1,23 @@
+import AbraLib/types;
+
+import AbraLib/bool;
+import AbraLib/equal;
+import AbraLib/sign;
+import AbraLib/nullor;
+import AbraLib/sub;
+
+// return lhs - rhs < 0 ? lhs : rhs;
+template minFunc<T> [T] min<T> (lhs [T], rhs [T]) = {
+  lessThan = equal[sign<T>(sub<T>(lhs, rhs)), -];
+  return nullOr<T>(lessThan, lhs) \ nullOr<T>(not[lessThan], rhs);
+};
+
+use minFunc<Trit>;
+use minFunc<Tryte>;
+use minFunc<Tiny>;
+use minFunc<Int>;
+use minFunc<Huge>;
+use minFunc<Hash>;
+use minFunc<Hash3>;
+use minFunc<Hash9>;
+use minFunc<Signature>;

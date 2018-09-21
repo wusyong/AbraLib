@@ -1,0 +1,13 @@
+import AbraLib/types;
+
+template asFunc<T> [T] as<T> (val [T]) = val;
+
+use asFunc<Trit>;
+use asFunc<Tryte>;
+use asFunc<Tiny>;
+use asFunc<Int>;
+use asFunc<Huge>;
+use asFunc<Hash>;
+use asFunc<Hash3>;
+use asFunc<Hash9>;
+use asFunc<Signature>;

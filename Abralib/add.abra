@@ -1,19 +1,25 @@
-import AbraLib/types
+import AbraLib/types;
 
-import AbraLib/fulladd
+import AbraLib/fulladd;
 
-template addFunc<T> add<T> (lhs [T], rhs [T]) = {
+template addFunc<T> [T] add<T> (lhs [T], rhs [T]) = {
   // use full adder but don't return the carry trit
   sum = fullAdd<T>(lhs, rhs, 0);
-  sum[1..];
-}
+  return sum[1..];
+};
 
-addFunc<Trit>;
-addFunc<Tryte>;
-addFunc<Tiny>;
-addFunc<Int>;
-addFunc<Huge>;
-addFunc<Hash>;
-addFunc<Hash3>;
-addFunc<Hash9>;
-addFunc<Signature>;
+use addFunc<Trit>;
+use addFunc<Tryte>;
+use addFunc<Tiny>;
+use addFunc<Int>;
+use addFunc<Huge>;
+use addFunc<Hash>;
+use addFunc<Hash3>;
+use addFunc<Hash9>;
+use addFunc<Signature>;
+
+use addFunc<Trit2>;
+use addFunc<Tryte2>;
+use addFunc<Tiny2>;
+use addFunc<Int2>;
+use addFunc<Huge2>;

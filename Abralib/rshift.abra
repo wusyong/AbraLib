@@ -1,0 +1,14 @@
+import AbraLib/types;
+
+template rshiftFunc<T> [T] rshift<T> (val [T]) = {
+    return 0 & val[0..T - 2];
+};
+
+use rshiftFunc<Tryte>;
+use rshiftFunc<Tiny>;
+use rshiftFunc<Int>;
+use rshiftFunc<Huge>;
+use rshiftFunc<Hash>;
+use rshiftFunc<Hash3>;
+use rshiftFunc<Hash9>;
+use rshiftFunc<Signature>;

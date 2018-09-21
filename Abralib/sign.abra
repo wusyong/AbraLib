@@ -1,0 +1,64 @@
+import AbraLib/types;
+
+// LUT logic: return the sign of a 3-trit value with least significant trit first
+//            return sign(trit1,trit2,trit3);
+// note that the sign of a trit *is* the trit, so we start at Tryte instead
+lut sign [
+  -,-,- = -;
+  0,-,- = -;
+  1,-,- = -;
+  -,0,- = -;
+  0,0,- = -;
+  1,0,- = -;
+  -,1,- = -;
+  0,1,- = -;
+  1,1,- = -;
+  -,-,0 = -;
+  0,-,0 = -;
+  1,-,0 = -;
+  -,0,0 = -;
+  0,0,0 = 0;
+  1,0,0 = 1;
+  -,1,0 = 1;
+  0,1,0 = 1;
+  1,1,0 = 1;
+  -,-,1 = 1;
+  0,-,1 = 1;
+  1,-,1 = 1;
+  -,0,1 = 1;
+  0,0,1 = 1;
+  1,0,1 = 1;
+  -,1,1 = 1;
+  0,1,1 = 1;
+  1,1,1 = 1;
+];
+
+func [Trit] sign<Trit> (val [Trit]) = val;
+
+func [Trit] sign<Tryte> (val [Tryte]) = sign[val[0], val[1], val[2]];
+
+template signFunc<T, P> [Trit] sign<T> (val [T]) = {
+  return sign[sign<P>(val[P * 0..1 * P - 1]),
+              sign<P>(val[P * 1..2 * P - 1]),
+              sign<P>(val[P * 2..3 * P - 1])];
+};
+
+use signFunc<Tiny, Tryte>;
+use signFunc<Int, Tiny>;
+use signFunc<Huge, Int>;
+use signFunc<Hash, Huge>;
+use signFunc<Hash3, Hash>;
+use signFunc<Hash9, Hash3>;
+use signFunc<Signature, Hash9>;
+
+template sign2Func<T, P> [Trit] sign<T> (val [T]) = {
+  return sign[sign<P>(val[P * 0..1 * P - 1]),
+              sign<P>(val[P * 1..2 * P - 1]),
+              0];
+};
+
+use sign2Func<Trit2, Trit>;
+use sign2Func<Tryte2, Tryte>;
+use sign2Func<Tiny2, Tiny>;
+use sign2Func<Int2, Int>;
+use sign2Func<Huge2, Huge>;

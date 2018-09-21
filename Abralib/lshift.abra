@@ -1,0 +1,14 @@
+import AbraLib/types;
+
+template lshiftFunc<T> [T] lshift<T> (val [T]) = {
+    return val[1..T - 1] & 0;
+};
+
+use lshiftFunc<Tryte>;
+use lshiftFunc<Tiny>;
+use lshiftFunc<Int>;
+use lshiftFunc<Huge>;
+use lshiftFunc<Hash>;
+use lshiftFunc<Hash3>;
+use lshiftFunc<Hash9>;
+use lshiftFunc<Signature>;

@@ -1,8 +1,8 @@
-import AbraLib/types
+import AbraLib/types;
 
 // LUT logic: return the sum of two trits plus a carry as a single trit plus a new carry
 //            return newcarry(trit1 + trit2 + carry), (trit1 + trit2 + carry);
-fullAdd [
+lut fullAdd [
   -,-,- = -,0;
   -,-,0 = -,1;
   -,-,1 = 0,-;
@@ -32,20 +32,32 @@ fullAdd [
   1,1,1 = 1,0;
 ];
 
-fullAddTrit (lhs [Trit], rhs [Trit], carry [Trit]) = fullAdd[lhs, rhs, carry];
+func [Trit + 1] fullAdd<Trit> (lhs [Trit], rhs [Trit], carry [Trit]) = fullAdd[lhs, rhs, carry];
 
-template fullAddFunc<T, P> fullAdd<T> (lhs [T], rhs [T], carry [Trit]) = {
-  add0 = fullAdd<P>(lhs[P * 0..], rhs[P * 0..], carry);
-  add1 = fullAdd<P>(lhs[P * 1..], rhs[P * 1..], add0[0]);
-  add2 = fullAdd<P>(lhs[P * 2..], rhs[P * 2..], add1[0]);
-  add2[0], add0[1..], add1[1..], add2[1..];
-}
+template fullAddFunc<T, P> [T + 1] fullAdd<T> (lhs [T], rhs [T], carry [Trit]) = {
+  add0 = fullAdd<P>(lhs[P * 0..1 * P - 1], rhs[P * 0..1 * P - 1], carry);
+  add1 = fullAdd<P>(lhs[P * 1..2 * P - 1], rhs[P * 1..2 * P - 1], add0[0]);
+  add2 = fullAdd<P>(lhs[P * 2..3 * P - 1], rhs[P * 2..3 * P - 1], add1[1]);
+  return add2[0] & add0[1..] & add1[1..] & add2[1..];
+};
 
-fullAddFunc<Tryte, Trit>;
-fullAddFunc<Tiny, Tryte>;
-fullAddFunc<Int, Tiny>;
-fullAddFunc<Huge, Int>;
-fullAddFunc<Hash, Huge>;
-fullAddFunc<Hash3, Hash>;
-fullAddFunc<Hash9, Hash3>;
-fullAddFunc<Signature, Hash9>;
+use fullAddFunc<Tryte, Trit>;
+use fullAddFunc<Tiny, Tryte>;
+use fullAddFunc<Int, Tiny>;
+use fullAddFunc<Huge, Int>;
+use fullAddFunc<Hash, Huge>;
+use fullAddFunc<Hash3, Hash>;
+use fullAddFunc<Hash9, Hash3>;
+use fullAddFunc<Signature, Hash9>;
+
+template fullAdd2Func<T, P> [T + 1] fullAdd<T> (lhs [T], rhs [T], carry [Trit]) = {
+  add0 = fullAdd<P>(lhs[P * 0..1 * P - 1], rhs[P * 0..1 * P - 1], carry);
+  add1 = fullAdd<P>(lhs[P * 1..2 * P - 1], rhs[P * 1..2 * P - 1], add0[0]);
+  return add1[0] & add0[1..] & add1[1..];
+};
+
+use fullAdd2Func<Trit2, Trit>;
+use fullAdd2Func<Tryte2, Tryte>;
+use fullAdd2Func<Tiny2, Tiny>;
+use fullAdd2Func<Int2, Int>;
+use fullAdd2Func<Huge2, Huge>;

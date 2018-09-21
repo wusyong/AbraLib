@@ -1,0 +1,81 @@
+import AbraLib;
+
+
+// txstore affects txfound delay 0;
+// txreq includes txstore;
+
+// func [Hash + Transaction] txstore(cmd [Trit], data [Transaction]) = KeyValue(cmd, txdigest(data), data);
+
+
+func [Hash + Transaction] KeyValue(cmd [Trit], key [Hash], value [Transaction]) = {
+  param = Traversal {
+    cmd = cmd;
+    data = value;
+    digest = key;
+  };
+  return key & traverse(param);
+};
+
+
+type Traversal {
+  cmd [Trit];
+  data [Transaction];
+  digest [Hash];
+};
+
+type TxCmd {
+  cmd [Trit];
+  data [Transaction];
+};
+
+type State [Hash3];
+
+func [Transaction] nullOr<Transaction>(t [Bool], val [Transaction]) = {
+  // tx is signature + 6 hashes (or 2 states)
+  return nullOr<Signature>(t, val.signature) &
+    nullOr<State>(t, val[Signature + 0 * State..Signature + 1 * State - 1]) &
+    nullOr<State>(t, val[Signature + 1 * State..Signature + 2 * State - 1]);
+};
+
+func [Traversal] nullOr<Traversal> (t [Bool], param [Traversal]) = {
+  return Traversal {
+    cmd = nullOr<Trit>(t, param.cmd);
+    data = nullOr<Transaction>(t, param.data);
+    digest = nullOr<Hash>(t, param.digest);
+  };
+};
+
+func [Transaction] traverse (param [Traversal]) = {
+  toleaf = equal[sign<Hash>(param.digest), 0];
+
+  nextleaf = nullOr<Traversal>(toleaf, param);
+
+  nexttraverse = Traversal {
+    cmd = param.cmd;
+    data = param.data;
+    digest = lshift<Hash>(param.digest);
+  };
+  next = nullOr<Traversal>(not[toleaf], nexttraverse);
+
+  one = nullOr<Traversal>(equal[1, param.digest[0]], next);
+  zer = nullOr<Traversal>(equal[0, param.digest[0]], next);
+  min = nullOr<Traversal>(equal[-, param.digest[0]], next);
+
+  brone = traverse(one);
+  brzer = traverse(zer);
+  brmin = traverse(min);
+
+  res = leaf( TxCmd { cmd = nextleaf.cmd; data = nextleaf.data; } );
+
+  return brone \ brzer \ brmin \ res;
+};
+
+func [Transaction] leaf (param [TxCmd]) = {
+  state data [Transaction] = 0;
+  oldData = data;
+  set = nullOr<Transaction>(equal[1, param.cmd], param.data);
+  get = nullOr<Transaction>(equal[0, param.cmd], data);
+  del = nullOr<Transaction>(equal[-, param.cmd], 0);
+  data = set \ get \ del;
+  return oldData;
+};

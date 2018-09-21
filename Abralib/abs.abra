@@ -1,0 +1,28 @@
+import AbraLib/types;
+
+import AbraLib/bool;
+import AbraLib/equal;
+import AbraLib/sign;
+import AbraLib/neg;
+import AbraLib/nullor;
+
+template absFunc<T> [T] abs<T> (val [T]) = {
+  negative = equal[sign<T>(val), -];
+  return nullOr<T>(not[negative], val) \ nullOr<T>(negative, neg<T>(val));
+};
+
+use absFunc<Trit>;
+use absFunc<Tryte>;
+use absFunc<Tiny>;
+use absFunc<Int>;
+use absFunc<Huge>;
+use absFunc<Hash>;
+use absFunc<Hash3>;
+use absFunc<Hash9>;
+use absFunc<Signature>;
+
+use absFunc<Trit2>;
+use absFunc<Tryte2>;
+use absFunc<Tiny2>;
+use absFunc<Int2>;
+use absFunc<Huge2>;

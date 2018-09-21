@@ -1,0 +1,23 @@
+import AbraLib/types;
+
+import AbraLib/bool;
+import AbraLib/equal;
+import AbraLib/sign;
+import AbraLib/nullor;
+import AbraLib/sub;
+
+// return lhs - rhs > 0 ? lhs : rhs;
+template maxFunc<T> [T] max<T> (lhs [T], rhs [T]) = {
+  greaterThan = equal[sign<T>(sub<T>(lhs, rhs)), 1];
+  return nullOr<T>(greaterThan, lhs) \ nullOr<T>(not[greaterThan], rhs);
+};
+
+use maxFunc<Trit>;
+use maxFunc<Tryte>;
+use maxFunc<Tiny>;
+use maxFunc<Int>;
+use maxFunc<Huge>;
+use maxFunc<Hash>;
+use maxFunc<Hash3>;
+use maxFunc<Hash9>;
+use maxFunc<Signature>;

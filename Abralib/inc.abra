@@ -1,18 +1,18 @@
-import AbraLib/types
+import AbraLib/types;
 
-import AbraLib/halfadd
+import AbraLib/halfadd;
 
-template incFunc<T> inc<T> (val [T]) = {
+template incFunc<T> [T] inc<T> (val [T]) = {
   halfSum = halfAdd<T>(val, 1);
-  halfSum[1..];
-}
+  return halfSum[1..];
+};
 
-incFunc<Trit>;
-incFunc<Tryte>;
-incFunc<Tiny>;
-incFunc<Int>;
-incFunc<Huge>;
-incFunc<Hash>;
-incFunc<Hash3>;
-incFunc<Hash9>;
-incFunc<Signature>;
+use incFunc<Trit>;
+use incFunc<Tryte>;
+use incFunc<Tiny>;
+use incFunc<Int>;
+use incFunc<Huge>;
+use incFunc<Hash>;
+use incFunc<Hash3>;
+use incFunc<Hash9>;
+use incFunc<Signature>;

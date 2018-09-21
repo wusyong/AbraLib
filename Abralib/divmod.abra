@@ -1,0 +1,24 @@
+import AbraLib/types;
+import AbraLib/as;
+
+import AbraLib/abs;
+import AbraLib/add;
+import AbraLib/neg;
+import AbraLib/rshift;
+import AbraLib/sub;
+
+template divmodFunc<T> [T * 2] divmod<T> (lhs [T * 2], rhs [T]) = {
+  dividend = abs<T * 2>(lhs);
+  divisor = abs<T>(rhs) & as<T>(0);
+  //TODO: do tritwise rshifting/adding/subbing in a recursive loop T times
+  //note: need double-width add/sub functions for that
+
+  // actually should return as<T>(quotient) & as<T>(reminder)
+  return lhs;
+};
+
+use divmodFunc<Trit>;
+use divmodFunc<Tryte>;
+use divmodFunc<Tiny>;
+use divmodFunc<Int>;
+use divmodFunc<Huge>;

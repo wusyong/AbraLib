@@ -1,0 +1,753 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="generator" content="Railroad Diagram Generator 1.49.1712"><style type="text/css" xml:space="preserve">
+    ::-moz-selection
+    {
+      color: #FFFCF0;
+      background: #0F0C00;
+    }
+    ::selection
+    {
+      color: #FFFCF0;
+      background: #0F0C00;
+    }      
+    .ebnf a
+    {
+      text-decoration: none;
+    }
+    .ebnf a:hover
+    {
+      color: #050400;
+      text-decoration: underline;
+    }    
+    .signature
+    {
+      color: #806600;
+      font-size: 11px;
+      text-align: right;
+    }
+    body
+    {
+      font: normal 12px Verdana, sans-serif;
+      color: #0F0C00;
+      background: #FFFCF0;
+    }
+    a:link, a:visited
+    {
+      color: #0F0C00;
+    }
+    a:link.signature, a:visited.signature
+    {
+      color: #806600;
+    }
+    a.button, #tabs li a
+    {
+      padding: 0.25em 0.5em;
+      border: 1px solid #806600;
+      background: #F1E8C6;
+      color: #806600;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a.button:hover, #tabs li a:hover
+    {
+      color: #050400;
+      background: #FFF6D1;
+      border-color: #050400;       
+    }     
+    #tabs
+    {
+      padding: 3px 10px;
+      margin-left: 0;
+      margin-top: 58px;
+      border-bottom: 1px solid #0F0C00;
+    }  
+    #tabs li
+    {
+      list-style: none;
+      margin-left: 5px;
+      display: inline;
+    }
+    #tabs li a
+    {     
+      border-bottom: 1px solid #0F0C00;
+    }
+    #tabs li a.active
+    {
+      color: #0F0C00;
+      background: #FFFCF0;
+      border-color: #0F0C00;
+      border-bottom: 1px solid #FFFCF0;
+      outline: none;
+    }
+    #divs div
+    {
+      display: none;
+      overflow:auto;
+    }
+    #divs div.active
+    {
+      display: block;
+    }
+    #text
+    {
+      border-color: #806600;
+      background: #FFFEFA;
+      color: #050400;
+    }
+    .small
+    {
+      vertical-align: top;
+      text-align: right;
+      font-size: 9px;
+      font-weight: normal;
+      line-height: 120%;
+    }
+    td.small
+    {
+      padding-top: 0px;
+    }
+    .hidden
+    {
+      visibility: hidden;
+    }
+    td:hover .hidden 
+    {
+      visibility: visible;
+    }
+    div.download
+    {
+      display: none;
+      background: #FFFCF0;
+      position: absolute;
+      right: 34px;
+      top: 94px;
+      padding: 10px;
+      border: 1px dotted #0F0C00;
+    }
+    #divs div.ebnf, div.ebnf
+    {
+      display: block;
+      padding-left: 16px;
+      padding-top: 2px; 
+      padding-bottom: 2px; 
+      background: #FFF6D1;
+    }
+    tr.option-line td:first-child
+    {
+      text-align: right
+    }
+    tr.option-text td
+    {
+      padding-bottom: 10px
+    }
+    table.palette
+    {
+      border-top: 1px solid #050400;
+      border-right: 1px solid #050400;
+      margin-bottom: 4px
+    }
+    td.palette
+    {
+      border-bottom: 1px solid #050400;
+      border-left: 1px solid #050400;
+    }
+    a.palette
+    {
+      padding: 2px 3px 2px 10px;
+      text-decoration: none;
+    }
+    .palette
+    {
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -o-user-select: none;
+      -ms-user-select: none;
+    }
+  </style></head>
+   <body>
+      
+      <p style="font-size: 14px; font-weight:bold"><a name="abra">abra:</a></p>
+      <img border="0" src="diagram/abra.png" height="68" width="258" usemap="#abra.map"><map name="abra.map">
+         <area shape="rect" coords="69,17,145,49" href="#abraStmt" title="abraStmt"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#abra" title="abra" shape="rect">abra</a>     ::= ( <a href="#abraStmt" title="abraStmt" shape="rect">abraStmt</a> ';' )*</pre></div>
+         
+      </p>
+      
+      <p>no references</p><br><p style="font-size: 14px; font-weight:bold"><a name="abraStmt">abraStmt:</a></p>
+      <img border="0" src="diagram/abraStmt.png" height="256" width="200" usemap="#abraStmt.map"><map name="abraStmt.map">
+         <area shape="rect" coords="49,1,137,33" href="#importStmt" title="importStmt">
+         <area shape="rect" coords="49,45,125,77" href="#typeStmt" title="typeStmt">
+         <area shape="rect" coords="49,89,113,121" href="#lutStmt" title="lutStmt">
+         <area shape="rect" coords="49,133,123,165" href="#funcStmt" title="funcStmt">
+         <area shape="rect" coords="49,177,151,209" href="#templateStmt" title="templateStmt">
+         <area shape="rect" coords="49,221,119,253" href="#useStmt" title="useStmt"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#abraStmt" title="abraStmt" shape="rect">abraStmt</a> ::= <a href="#importStmt" title="importStmt" shape="rect">importStmt</a>
+           | <a href="#typeStmt" title="typeStmt" shape="rect">typeStmt</a>
+           | <a href="#lutStmt" title="lutStmt" shape="rect">lutStmt</a>
+           | <a href="#funcStmt" title="funcStmt" shape="rect">funcStmt</a>
+           | <a href="#templateStmt" title="templateStmt" shape="rect">templateStmt</a>
+           | <a href="#useStmt" title="useStmt" shape="rect">useStmt</a></pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#abra" title="abra">abra</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="importStmt">importStmt:</a></p>
+      <img border="0" src="diagram/importStmt.png" height="80" width="262" usemap="#importStmt.map"><map name="importStmt.map">
+         <area shape="rect" coords="131,45,213,77" href="#pathName" title="pathName"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#importStmt" title="importStmt" shape="rect">importStmt</a>
+         ::= 'import' <a href="#pathName" title="pathName" shape="rect">pathName</a> ( '/' <a href="#pathName" title="pathName" shape="rect">pathName</a> )*</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#abraStmt" title="abraStmt">abraStmt</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="typeStmt">typeStmt:</a></p>
+      <img border="0" src="diagram/typeStmt.png" height="102" width="618" usemap="#typeStmt.map"><map name="typeStmt.map">
+         <area shape="rect" coords="99,1,181,33" href="#typeName" title="typeName">
+         <area shape="rect" coords="221,1,291,33" href="#typeSize" title="typeSize">
+         <area shape="rect" coords="289,67,367,99" href="#fieldName" title="fieldName">
+         <area shape="rect" coords="387,67,457,99" href="#typeSize" title="typeSize"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#typeStmt" title="typeStmt" shape="rect">typeStmt</a> ::= 'type' <a href="#typeName" title="typeName" shape="rect">typeName</a> ( <a href="#typeSize" title="typeSize" shape="rect">typeSize</a> | '{' ( <a href="#fieldName" title="fieldName" shape="rect">fieldName</a> <a href="#typeSize" title="typeSize" shape="rect">typeSize</a> ';' )+ '}' )</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#abraStmt" title="abraStmt">abraStmt</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="lutStmt">lutStmt:</a></p>
+      <img border="0" src="diagram/lutStmt.png" height="52" width="562" usemap="#lutStmt.map"><map name="lutStmt.map">
+         <area shape="rect" coords="85,17,155,49" href="#lutName" title="lutName">
+         <area shape="rect" coords="241,17,297,49" href="#tritList" title="tritList">
+         <area shape="rect" coords="367,17,423,49" href="#tritList" title="tritList"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#lutStmt" title="lutStmt" shape="rect">lutStmt</a>  ::= 'lut' <a href="#lutName" title="lutName" shape="rect">lutName</a> '[' ( <a href="#tritList" title="tritList" shape="rect">tritList</a> '=' <a href="#tritList" title="tritList" shape="rect">tritList</a> ';' )+ ']'</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#abraStmt" title="abraStmt">abraStmt</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="funcStmt">funcStmt:</a></p>
+      <img border="0" src="diagram/funcStmt.png" height="36" width="222" usemap="#funcStmt.map"><map name="funcStmt.map">
+         <area shape="rect" coords="95,1,193,33" href="#funcDefinition" title="funcDefinition"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#funcStmt" title="funcStmt" shape="rect">funcStmt</a> ::= 'func' <a href="#funcDefinition" title="funcDefinition" shape="rect">funcDefinition</a></pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#abraStmt" title="abraStmt">abraStmt</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="templateStmt">templateStmt:</a></p>
+      <img border="0" src="diagram/templateStmt.png" height="80" width="694" usemap="#templateStmt.map"><map name="templateStmt.map">
+         <area shape="rect" coords="127,45,235,77" href="#templateName" title="templateName">
+         <area shape="rect" coords="325,45,477,77" href="#placeHolderTypeName" title="placeHolderTypeName">
+         <area shape="rect" coords="567,45,665,77" href="#funcDefinition" title="funcDefinition"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#templateStmt" title="templateStmt" shape="rect">templateStmt</a>
+         ::= 'template' <a href="#templateName" title="templateName" shape="rect">templateName</a> '&lt;' <a href="#placeHolderTypeName" title="placeHolderTypeName" shape="rect">placeHolderTypeName</a> ( ',' <a href="#placeHolderTypeName" title="placeHolderTypeName" shape="rect">placeHolderTypeName</a> )* '&gt;' <a href="#funcDefinition" title="funcDefinition" shape="rect">funcDefinition</a></pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#abraStmt" title="abraStmt">abraStmt</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="useStmt">useStmt:</a></p>
+      <img border="0" src="diagram/useStmt.png" height="80" width="470" usemap="#useStmt.map"><map name="useStmt.map">
+         <area shape="rect" coords="91,45,199,77" href="#templateName" title="templateName">
+         <area shape="rect" coords="289,45,371,77" href="#typeName" title="typeName"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#useStmt" title="useStmt" shape="rect">useStmt</a>  ::= 'use' <a href="#templateName" title="templateName" shape="rect">templateName</a> '&lt;' <a href="#typeName" title="typeName" shape="rect">typeName</a> ( ',' <a href="#typeName" title="typeName" shape="rect">typeName</a> )* '&gt;'</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#abraStmt" title="abraStmt">abraStmt</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="funcDefinition">funcDefinition:</a></p>
+      <img border="0" src="diagram/funcDefinition.png" height="112" width="950" usemap="#funcDefinition.map"><map name="funcDefinition.map">
+         <area shape="rect" coords="29,45,109,77" href="#funcName" title="funcName">
+         <area shape="rect" coords="199,77,281,109" href="#typeName" title="typeName">
+         <area shape="rect" coords="437,45,531,77" href="#paramName" title="paramName">
+         <area shape="rect" coords="551,45,621,77" href="#typeSize" title="typeSize">
+         <area shape="rect" coords="707,45,777,77" href="#typeSize" title="typeSize">
+         <area shape="rect" coords="847,45,921,77" href="#funcBody" title="funcBody"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#funcDefinition" title="funcDefinition" shape="rect">funcDefinition</a>
+         ::= <a href="#funcName" title="funcName" shape="rect">funcName</a> ( '&lt;' <a href="#typeName" title="typeName" shape="rect">typeName</a> '&gt;' )? '(' <a href="#paramName" title="paramName" shape="rect">paramName</a> <a href="#typeSize" title="typeSize" shape="rect">typeSize</a> ( ',' <a href="#paramName" title="paramName" shape="rect">paramName</a> <a href="#typeSize" title="typeSize" shape="rect">typeSize</a> )* ')' <a href="#typeSize" title="typeSize" shape="rect">typeSize</a> '=' <a href="#funcBody" title="funcBody" shape="rect">funcBody</a></pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#funcStmt" title="funcStmt">funcStmt</a></li>
+            
+            <li><a href="#templateStmt" title="templateStmt">templateStmt</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="funcBody">funcBody:</a></p>
+      <img border="0" src="diagram/funcBody.png" height="118" width="628" usemap="#funcBody.map"><map name="funcBody.map">
+         <area shape="rect" coords="49,1,133,33" href="#mergeExpr" title="mergeExpr">
+         <area shape="rect" coords="137,67,219,99" href="#assignExpr" title="assignExpr">
+         <area shape="rect" coords="403,67,487,99" href="#mergeExpr" title="mergeExpr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#funcBody" title="funcBody" shape="rect">funcBody</a> ::= <a href="#mergeExpr" title="mergeExpr" shape="rect">mergeExpr</a>
+           | '{' ( <a href="#assignExpr" title="assignExpr" shape="rect">assignExpr</a> ';' )* 'return' <a href="#mergeExpr" title="mergeExpr" shape="rect">mergeExpr</a> ';' '}'</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#funcDefinition" title="funcDefinition">funcDefinition</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="assignExpr">assignExpr:</a></p>
+      <img border="0" src="diagram/assignExpr.png" height="68" width="530" usemap="#assignExpr.map"><map name="assignExpr.map">
+         <area shape="rect" coords="143,1,217,33" href="#varName" title="varName">
+         <area shape="rect" coords="257,33,327,65" href="#typeSize" title="typeSize">
+         <area shape="rect" coords="417,1,501,33" href="#mergeExpr" title="mergeExpr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#assignExpr" title="assignExpr" shape="rect">assignExpr</a>
+         ::= 'state'? <a href="#varName" title="varName" shape="rect">varName</a> <a href="#typeSize" title="typeSize" shape="rect">typeSize</a>? '=' <a href="#mergeExpr" title="mergeExpr" shape="rect">mergeExpr</a></pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#funcBody" title="funcBody">funcBody</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="mergeExpr">mergeExpr:</a></p>
+      <img border="0" src="diagram/mergeExpr.png" height="80" width="184" usemap="#mergeExpr.map"><map name="mergeExpr.map">
+         <area shape="rect" coords="49,45,135,77" href="#concatExpr" title="concatExpr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#mergeExpr" title="mergeExpr" shape="rect">mergeExpr</a>
+         ::= <a href="#concatExpr" title="concatExpr" shape="rect">concatExpr</a> ( '\' <a href="#concatExpr" title="concatExpr" shape="rect">concatExpr</a> )*</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#assignExpr" title="assignExpr">assignExpr</a></li>
+            
+            <li><a href="#funcBody" title="funcBody">funcBody</a></li>
+            
+            <li><a href="#funcExpr" title="funcExpr">funcExpr</a></li>
+            
+            <li><a href="#lutExpr" title="lutExpr">lutExpr</a></li>
+            
+            <li><a href="#postfixExpr" title="postfixExpr">postfixExpr</a></li>
+            
+            <li><a href="#typeExpr" title="typeExpr">typeExpr</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="concatExpr">concatExpr:</a></p>
+      <img border="0" src="diagram/concatExpr.png" height="80" width="184" usemap="#concatExpr.map"><map name="concatExpr.map">
+         <area shape="rect" coords="49,45,135,77" href="#postfixExpr" title="postfixExpr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#concatExpr" title="concatExpr" shape="rect">concatExpr</a>
+         ::= <a href="#postfixExpr" title="postfixExpr" shape="rect">postfixExpr</a> ( '&amp;' <a href="#postfixExpr" title="postfixExpr" shape="rect">postfixExpr</a> )*</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#mergeExpr" title="mergeExpr">mergeExpr</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="postfixExpr">postfixExpr:</a></p>
+      <img border="0" src="diagram/postfixExpr.png" height="256" width="274" usemap="#postfixExpr.map"><map name="postfixExpr.map">
+         <area shape="rect" coords="49,1,109,33" href="#integer" title="integer">
+         <area shape="rect" coords="49,45,121,77" href="#typeExpr" title="typeExpr">
+         <area shape="rect" coords="49,89,119,121" href="#funcExpr" title="funcExpr">
+         <area shape="rect" coords="49,133,109,165" href="#lutExpr" title="lutExpr">
+         <area shape="rect" coords="49,177,119,209" href="#sliceExpr" title="sliceExpr">
+         <area shape="rect" coords="95,221,179,253" href="#mergeExpr" title="mergeExpr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#postfixExpr" title="postfixExpr" shape="rect">postfixExpr</a>
+         ::= <a href="#integer" title="integer" shape="rect">integer</a>
+           | <a href="#typeExpr" title="typeExpr" shape="rect">typeExpr</a>
+           | <a href="#funcExpr" title="funcExpr" shape="rect">funcExpr</a>
+           | <a href="#lutExpr" title="lutExpr" shape="rect">lutExpr</a>
+           | <a href="#sliceExpr" title="sliceExpr" shape="rect">sliceExpr</a>
+           | '(' <a href="#mergeExpr" title="mergeExpr" shape="rect">mergeExpr</a> ')'</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#concatExpr" title="concatExpr">concatExpr</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="typeExpr">typeExpr:</a></p>
+      <img border="0" src="diagram/typeExpr.png" height="52" width="572" usemap="#typeExpr.map"><map name="typeExpr.map">
+         <area shape="rect" coords="29,17,111,49" href="#typeName" title="typeName">
+         <area shape="rect" coords="199,17,277,49" href="#fieldName" title="fieldName">
+         <area shape="rect" coords="347,17,431,49" href="#mergeExpr" title="mergeExpr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#typeExpr" title="typeExpr" shape="rect">typeExpr</a> ::= <a href="#typeName" title="typeName" shape="rect">typeName</a> '{' ( <a href="#fieldName" title="fieldName" shape="rect">fieldName</a> '=' <a href="#mergeExpr" title="mergeExpr" shape="rect">mergeExpr</a> ';' )+ '}'</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#postfixExpr" title="postfixExpr">postfixExpr</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="funcExpr">funcExpr:</a></p>
+      <img border="0" src="diagram/funcExpr.png" height="112" width="616" usemap="#funcExpr.map"><map name="funcExpr.map">
+         <area shape="rect" coords="29,45,109,77" href="#funcName" title="funcName">
+         <area shape="rect" coords="199,77,281,109" href="#typeName" title="typeName">
+         <area shape="rect" coords="437,45,521,77" href="#mergeExpr" title="mergeExpr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#funcExpr" title="funcExpr" shape="rect">funcExpr</a> ::= <a href="#funcName" title="funcName" shape="rect">funcName</a> ( '&lt;' <a href="#typeName" title="typeName" shape="rect">typeName</a> '&gt;' )? '(' <a href="#mergeExpr" title="mergeExpr" shape="rect">mergeExpr</a> ( ',' <a href="#mergeExpr" title="mergeExpr" shape="rect">mergeExpr</a> )* ')'</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#postfixExpr" title="postfixExpr">postfixExpr</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="lutExpr">lutExpr:</a></p>
+      <img border="0" src="diagram/lutExpr.png" height="80" width="364" usemap="#lutExpr.map"><map name="lutExpr.map">
+         <area shape="rect" coords="29,45,99,77" href="#lutName" title="lutName">
+         <area shape="rect" coords="185,45,269,77" href="#mergeExpr" title="mergeExpr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#lutExpr" title="lutExpr" shape="rect">lutExpr</a>  ::= <a href="#lutName" title="lutName" shape="rect">lutName</a> '[' <a href="#mergeExpr" title="mergeExpr" shape="rect">mergeExpr</a> ( ',' <a href="#mergeExpr" title="mergeExpr" shape="rect">mergeExpr</a> )* ']'</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#postfixExpr" title="postfixExpr">postfixExpr</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="sliceExpr">sliceExpr:</a></p>
+      <img border="0" src="diagram/sliceExpr.png" height="148" width="870" usemap="#sliceExpr.map"><map name="sliceExpr.map">
+         <area shape="rect" coords="49,17,123,49" href="#varName" title="varName">
+         <area shape="rect" coords="49,61,143,93" href="#paramName" title="paramName">
+         <area shape="rect" coords="267,17,345,49" href="#fieldName" title="fieldName">
+         <area shape="rect" coords="471,49,549,81" href="#constExpr" title="constExpr">
+         <area shape="rect" coords="657,113,735,145" href="#constExpr" title="constExpr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#sliceExpr" title="sliceExpr" shape="rect">sliceExpr</a>
+         ::= ( <a href="#varName" title="varName" shape="rect">varName</a> | <a href="#paramName" title="paramName" shape="rect">paramName</a> ) ( '.' <a href="#fieldName" title="fieldName" shape="rect">fieldName</a> )* ( '[' <a href="#constExpr" title="constExpr" shape="rect">constExpr</a> ( '..' <a href="#constExpr" title="constExpr" shape="rect">constExpr</a>? )? ']' )?</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#postfixExpr" title="postfixExpr">postfixExpr</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="constExpr">constExpr:</a></p>
+      <img border="0" src="diagram/constExpr.png" height="124" width="180" usemap="#constExpr.map"><map name="constExpr.map">
+         <area shape="rect" coords="49,89,131,121" href="#constTerm" title="constTerm"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#constExpr" title="constExpr" shape="rect">constExpr</a>
+         ::= <a href="#constTerm" title="constTerm" shape="rect">constTerm</a> ( [-+] <a href="#constTerm" title="constTerm" shape="rect">constTerm</a> )*</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#constFactor" title="constFactor">constFactor</a></li>
+            
+            <li><a href="#sliceExpr" title="sliceExpr">sliceExpr</a></li>
+            
+            <li><a href="#typeSize" title="typeSize">typeSize</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="constTerm">constTerm:</a></p>
+      <img border="0" src="diagram/constTerm.png" height="168" width="188" usemap="#constTerm.map"><map name="constTerm.map">
+         <area shape="rect" coords="49,133,139,165" href="#constFactor" title="constFactor"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#constTerm" title="constTerm" shape="rect">constTerm</a>
+         ::= <a href="#constFactor" title="constFactor" shape="rect">constFactor</a> ( [*/%] <a href="#constFactor" title="constFactor" shape="rect">constFactor</a> )*</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#constExpr" title="constExpr">constExpr</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="constFactor">constFactor:</a></p>
+      <img border="0" src="diagram/constFactor.png" height="158" width="354" usemap="#constFactor.map"><map name="constFactor.map">
+         <area shape="rect" coords="135,35,201,67" href="#number" title="number">
+         <area shape="rect" coords="135,79,217,111" href="#typeName" title="typeName">
+         <area shape="rect" coords="181,123,259,155" href="#constExpr" title="constExpr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#constFactor" title="constFactor" shape="rect">constFactor</a>
+         ::= '-'* ( <a href="#number" title="number" shape="rect">number</a> | <a href="#typeName" title="typeName" shape="rect">typeName</a> | '(' <a href="#constExpr" title="constExpr" shape="rect">constExpr</a> ')' )</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#constTerm" title="constTerm">constTerm</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="typeSize">typeSize:</a></p>
+      <img border="0" src="diagram/typeSize.png" height="36" width="228" usemap="#typeSize.map"><map name="typeSize.map">
+         <area shape="rect" coords="75,1,153,33" href="#constExpr" title="constExpr"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#typeSize" title="typeSize" shape="rect">typeSize</a> ::= '[' <a href="#constExpr" title="constExpr" shape="rect">constExpr</a> ']'</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#assignExpr" title="assignExpr">assignExpr</a></li>
+            
+            <li><a href="#funcDefinition" title="funcDefinition">funcDefinition</a></li>
+            
+            <li><a href="#typeStmt" title="typeStmt">typeStmt</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="tritList">tritList:</a></p>
+      <img border="0" src="diagram/tritList.png" height="80" width="134" usemap="#tritList.map"><map name="tritList.map">
+         <area shape="rect" coords="49,45,85,77" href="#trit" title="trit"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#tritList" title="tritList" shape="rect">tritList</a> ::= <a href="#trit" title="trit" shape="rect">trit</a> ( ',' <a href="#trit" title="trit" shape="rect">trit</a> )*</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#lutStmt" title="lutStmt">lutStmt</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="trit">trit:</a></p>
+      <img border="0" src="diagram/trit.png" height="124" width="126">
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#trit" title="trit" shape="rect">trit</a>     ::= [-01]</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#integer" title="integer">integer</a></li>
+            
+            <li><a href="#tritList" title="tritList">tritList</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="name">name:</a></p>
+      <img border="0" src="diagram/name.png" height="290" width="282">
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#name" title="name" shape="rect">name</a>     ::= [a-zA-Z_] [0-9a-zA-Z_]*</pre></div>
+         
+      </p>
+      
+      <p>no references</p><br><p style="font-size: 14px; font-weight:bold"><a name="number">number:</a></p>
+      <img border="0" src="diagram/number.png" height="52" width="160">
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#number" title="number" shape="rect">number</a>   ::= [0-9]+</pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#constFactor" title="constFactor">constFactor</a></li>
+            
+            <li><a href="#integer" title="integer">integer</a></li>
+            
+         </ul>
+         
+      </p><br><p style="font-size: 14px; font-weight:bold"><a name="integer">integer:</a></p>
+      <img border="0" src="diagram/integer.png" height="112" width="250" usemap="#integer.map"><map name="integer.map">
+         <area shape="rect" coords="49,1,85,33" href="#trit" title="trit">
+         <area shape="rect" coords="135,45,201,77" href="#number" title="number"></map>
+      
+      <p>
+         
+         <div class="ebnf"><pre><a href="#integer" title="integer" shape="rect">integer</a>  ::= <a href="#trit" title="trit" shape="rect">trit</a>
+           | '-'? <a href="#number" title="number" shape="rect">number</a></pre></div>
+         
+      </p>
+      
+      <p>referenced by:
+         
+         <ul>
+            
+            <li><a href="#postfixExpr" title="postfixExpr">postfixExpr</a></li>
+            
+         </ul>
+         
+      </p><br><hr>
+      
+      <p>
+         
+         <table class="signature" border="0">
+            
+            <tr>
+               
+               <td style="width: 100%">&nbsp;</td>
+               
+               <td valign="top">
+                  
+                  <nobr class="signature">... generated by <a name="Railroad-Diagram-Generator" class="signature" title="http://www.bottlecaps.de/rr/ui" href="http://www.bottlecaps.de/rr/ui" target="_blank">Railroad Diagram Generator</a></nobr>
+                  
+               </td>
+               
+               <td><a name="Railroad-Diagram-Generator" title="http://www.bottlecaps.de/rr/ui" href="http://www.bottlecaps.de/rr/ui" target="_blank">
+                     <img border="0" src="diagram/rr-1.49.1712.png" height="16" width="16"></a></td>
+               
+            </tr>
+            
+         </table>
+         
+      </p>
+      
+   </body>
+</html>

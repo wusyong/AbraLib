@@ -1,28 +1,39 @@
-import AbraLib/types
+import AbraLib/types;
 
 // LUT logic: return the negative value of the input trit
 //            return -trit1;
 // note that making an entire trit-vector's value negative
 // can be done by simply negating every trit in the vector
-neg [
+lut neg [
   - = 1;
   0 = 0;
   1 = -;
 ];
 
-negTrit (val [Trit]) = neg[val];
+func [Trit] neg<Trit> (val [Trit]) = neg[val];
 
-template negFunc<T, P> neg<T> (val [T]) = {
-  neg<P>(val[0 * P..]),
-  neg<P>(val[1 * P..]),
-  neg<P>(val[2 * P..]);
-}
+template negFunc<T, P> [T] neg<T> (val [T]) = {
+  return neg<P>(val[0 * P..1 * P - 1]) &
+         neg<P>(val[1 * P..2 * P - 1]) &
+         neg<P>(val[2 * P..3 * P - 1]);
+};
 
-negFunc<Tryte, Trit>;
-negFunc<Tiny, Tryte>;
-negFunc<Int, Tiny>;
-negFunc<Huge, Int>;
-negFunc<Hash, Huge>;
-negFunc<Hash3, Hash>;
-negFunc<Hash9, Hash3>;
-negFunc<Signature, Hash9>;
+use negFunc<Tryte, Trit>;
+use negFunc<Tiny, Tryte>;
+use negFunc<Int, Tiny>;
+use negFunc<Huge, Int>;
+use negFunc<Hash, Huge>;
+use negFunc<Hash3, Hash>;
+use negFunc<Hash9, Hash3>;
+use negFunc<Signature, Hash9>;
+
+template neg2Func<T, P> [T] neg<T> (val [T]) = {
+  return neg<P>(val[0 * P..1 * P - 1]) &
+         neg<P>(val[1 * P..2 * P - 1]);
+};
+
+use neg2Func<Trit2, Trit>;
+use neg2Func<Tryte2, Tryte>;
+use neg2Func<Tiny2, Tiny>;
+use neg2Func<Int2, Int>;
+use neg2Func<Huge2, Huge>;
