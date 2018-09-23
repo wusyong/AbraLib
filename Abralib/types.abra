@@ -2,6 +2,7 @@
 // note that you can define the optimal trit size for any type's
 // range to reduce energy requirements accordingly, but for
 // simplicity we'll only define power-of-3 sized types for now
+
 type Trit [1];           // -1 to +1
 type Tryte [3];          // -13 to +13
 type Tiny [9];           // -9,841 to +9,841
@@ -20,11 +21,12 @@ type Int2 [Int * 2];
 type Huge2 [Huge * 2];
 
 // define a convenience type to make code more readable
-// expected to be a binary boolean value 0 (false) or 1 (true)
-// should never be null or assume the value -
+// should always be a binary boolean value - (false) or 1 (true)
+// should never be null or assume the value 0
 // (note: this convention is not enforced by Abra)
 type Bool [Trit];
 
+type Carry [Trit];
 
 // here's how to define a named structured trit vector
 // it consists of the concatenation of all sub-vectors
@@ -38,7 +40,7 @@ type Attachment {
   timestampUpperBound [Int];
 };
 
-// IOTA transaction layout
+// sample IOTA transaction layout
 type Transaction {
   signature [Signature];
   extraDataDigest [Hash];

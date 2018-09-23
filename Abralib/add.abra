@@ -1,11 +1,9 @@
-import AbraLib/types;
-
 import AbraLib/fulladd;
 
 template addFunc<T> [T] add<T> (lhs [T], rhs [T]) = {
   // use full adder but don't return the carry trit
   sum = fullAdd<T>(lhs, rhs, 0);
-  return sum[1..];
+  return sum[0 : T];
 };
 
 use addFunc<Trit>;

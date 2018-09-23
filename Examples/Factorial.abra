@@ -19,5 +19,5 @@ func [Huge] factorial (n [Huge]) = {
 
   next = mul<Huge>(n, factorial(nMin1));
 
-  return nullOr<Huge>(isZero, 1) \ next[0..Huge - 1];
+  return nullOr<Huge>(isZero, 1) \ next[0 : Huge];
 };

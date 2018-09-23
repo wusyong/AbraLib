@@ -1,6 +1,4 @@
-import AbraLib/types;
 import AbraLib/as;
-
 import AbraLib/fulladd;
 import AbraLib/halfadd;
 
@@ -782,14 +780,14 @@ func [Tryte2] mul<Tryte> (lhs [Tryte], rhs [Tryte]) = mul[lhs[0], lhs[1], lhs[2]
 // of its parameters so as not to lose any precision
 template mulFunc<T, P> [T * 2] mul<T> (lhs [T], rhs [T]) = {
   // get lhs digits
-  A = lhs[0 * P..1 * P - 1];
-  B = lhs[1 * P..2 * P - 1];
-  C = lhs[2 * P..3 * P - 1];
+  A = lhs[P * 0 : P];
+  B = lhs[P * 1 : P];
+  C = lhs[P * 2 : P];
 
   // get rhs digits
-  D = rhs[0 * P..1 * P - 1];
-  E = rhs[1 * P..2 * P - 1];
-  F = rhs[2 * P..3 * P - 1];
+  D = rhs[P * 0 : P];
+  E = rhs[P * 1 : P];
+  F = rhs[P * 2 : P];
 
   // determine all products
   AD = mul<P>(A, D);
@@ -806,34 +804,34 @@ template mulFunc<T, P> [T * 2] mul<T> (lhs [T], rhs [T]) = {
   //      a carry, but the sum of 3 products can...
 
   // AD
-  tryte0 = AD[0 * P..1 * P - 1];
-  carry0 = AD[1 * P..2 * P - 1];
+  tryte0 = AD[P * 0 : P];
+  carry0 = AD[P * 1 : P];
 
   // AE0 + BD0 + carry0
   AEBD = addProduct<P>(AE, BD);
-  AEBDc = addCarryToProduct<P>(AEBD[1..], carry0, 0);
-  tryte1 = AEBDc[0 * P..1 * P - 1];
-  carry1 = AEBDc[1 * P..2 * P - 1];
+  AEBDc = addCarryToProduct<P>(AEBD[0 : P * 2], carry0, 0);
+  tryte1 = AEBDc[P * 0 : P];
+  carry1 = AEBDc[P * 1 : P];
 
   // AF00 + BE00 + CD00 + carry1
   AFBE = addProduct<P>(AF, BE);
-  AFBEc = addCarryToProduct<P>(AFBE[1..], carry1, 0);
+  AFBEc = addCarryToProduct<P>(AFBE[0 : P * 2], carry1, 0);
   // note: adding 3rd product, watch the extra overflow carry trit
   AFBEcCD = addProduct<P>(AFBEc, CD);
-  tryte2 = AFBEcCD[1 + 0 * P..1 * P];
-  carry2 = AFBEcCD[1 + 1 * P..2 * P];
+  tryte2 = AFBEcCD[P * 0 : P];
+  carry2 = AFBEcCD[P * 1 : P];
 
   // BF000 + CE000 + carry2
   BFCD = addProduct<P>(BF, CE);
   // note: this is where the extra overflow carry trit goes
-  BFCDc = addCarryToProduct<P>(BFCD[1..], carry2, AFBEcCD[0]);
-  tryte3 = BFCDc[0 * P..1 * P - 1];
-  carry3 = BFCDc[1 * P..2 * P - 1];
+  BFCDc = addCarryToProduct<P>(BFCD[0 : P * 2], carry2, AFBEcCD[P * 2]);
+  tryte3 = BFCDc[P * 0 : P];
+  carry3 = BFCDc[P * 1 : P];
 
   // CF0000 + carry3
   CFc = addCarryToProduct<P>(CF, carry3, 0);
-  // tryte4 = CFc[0 * P..1 * P - 1];
-  // tryte5 = CFc[1 * P..2 * P - 1];
+  // tryte4 = CFc[P * 0 : P];
+  // tryte5 = CFc[P * 1 : P];
 
   return tryte0 & tryte1 & tryte2 & tryte3 & CFc;
 };
@@ -845,10 +843,10 @@ use mulFunc<Hash, Huge>;
 
 
 // add two products together
-template addProductFunc<T> [T * 2 + 1] addProduct<T>(lhs [T * 2], rhs [T * 2]) = {
-  lo = fullAdd<T>(lhs[0 * T..1 * T - 1], rhs[0 * T..1 * T - 1], 0);
-  hi = fullAdd<T>(lhs[1 * T..2 * T - 1], rhs[1 * T..2 * T - 1], lo[0]);
-  return hi[0] & lo[1..] & hi[1..];
+template addProductFunc<T> [T * 2 + Carry] addProduct<T>(lhs [T * 2], rhs [T * 2]) = {
+  lo = fullAdd<T>(lhs[T * 0 : T], rhs[T * 0 : T], 0);
+  hi = fullAdd<T>(lhs[T * 1 : T], rhs[T * 1 : T], lo[T]);
+  return lo[0 : T] & hi;
 };
 
 use addProductFunc<Tryte>;
@@ -858,10 +856,10 @@ use addProductFunc<Huge>;
 
 
 // add carry and possible extra trit to a product
-template addCarryToProductFunc<T> [T *2] addCarryToProduct<T>(lhs [T * 2], carry [T], extraTrit [Trit]) = {
-  lo = fullAdd<T>(lhs[0 * T..1 * T - 1], carry, extraTrit);
-  hi = halfAdd<T>(lhs[1 * T..2 * T - 1], lo[0]);
-  return lo[1..] & hi[1..];
+template addCarryToProductFunc<T> [T * 2] addCarryToProduct<T>(lhs [T * 2], carry [T], extraTrit [Carry]) = {
+  lo = fullAdd<T>(lhs[T * 0 : T], carry, extraTrit);
+  hi = halfAdd<T>(lhs[T * 1 : T], lo[T]);
+  return lo[0 : T] & hi[0 : T];
 };
 
 use addCarryToProductFunc<Tryte>;

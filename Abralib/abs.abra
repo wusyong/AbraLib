@@ -1,5 +1,3 @@
-import AbraLib/types;
-
 import AbraLib/bool;
 import AbraLib/equal;
 import AbraLib/sign;

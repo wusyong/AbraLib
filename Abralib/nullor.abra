@@ -1,7 +1,6 @@
 import AbraLib/types;
 
-// LUT logic: return the 2rd input trit only when 1st input trit equals 1 (true)
-//            return (trit1 == 1) ? trit2 : null;
+// LUT logic: return (trit1 == 1) ? trit2 : null;
 lut nullOrValue [
   1,- = -;
   1,0 = 0;
@@ -25,10 +24,9 @@ lut nullOrValue [
 func [Trit] nullOr<Trit> (t [Bool], val [Trit]) = nullOrValue[t, val];
 
 template nullOrFunc<T, P> [T] nullOr<T> (t [Bool], val [T]) = {
-  // concatenate the 3 separate parts via the part-specific function
-  return nullOr<P>(t, val[0 * P..1 * P - 1]) &
-         nullOr<P>(t, val[1 * P..2 * P - 1]) &
-         nullOr<P>(t, val[2 * P..3 * P - 1]);
+  return nullOr<P>(t, val[P * 0 : P]) &
+         nullOr<P>(t, val[P * 1 : P]) &
+         nullOr<P>(t, val[P * 2 : P]);
 };
 
 use nullOrFunc<Tryte, Trit>;
@@ -41,9 +39,8 @@ use nullOrFunc<Hash9, Hash3>;
 use nullOrFunc<Signature, Hash9>;
 
 template nullOr2Func<T, P> [T] nullOr<T> (t [Bool], val [T]) = {
-  // concatenate the 3 separate parts via the part-specific function
-  return nullOr<P>(t, val[0 * P..1 * P - 1]) &
-         nullOr<P>(t, val[1 * P..2 * P - 1]);
+  return nullOr<P>(t, val[P * 0 : P]) &
+         nullOr<P>(t, val[P * 1 : P]);
 };
 
 use nullOr2Func<Trit2, Trit>;

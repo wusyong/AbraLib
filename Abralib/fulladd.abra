@@ -1,44 +1,44 @@
 import AbraLib/types;
 
 // LUT logic: return the sum of two trits plus a carry as a single trit plus a new carry
-//            return newcarry(trit1 + trit2 + carry), (trit1 + trit2 + carry);
+//            return (trit1 + trit2 + carry), newcarry(trit1 + trit2 + carry);
 lut fullAdd [
-  -,-,- = -,0;
-  -,-,0 = -,1;
-  -,-,1 = 0,-;
-  -,0,- = -,1;
-  -,0,0 = 0,-;
+  -,-,- = 0,-;
+  -,-,0 = 1,-;
+  -,-,1 = -,0;
+  -,0,- = 1,-;
+  -,0,0 = -,0;
   -,0,1 = 0,0;
-  -,1,- = 0,-;
+  -,1,- = -,0;
   -,1,0 = 0,0;
-  -,1,1 = 0,1;
-  0,-,- = -,1;
-  0,-,0 = 0,-;
+  -,1,1 = 1,0;
+  0,-,- = 1,-;
+  0,-,0 = -,0;
   0,-,1 = 0,0;
-  0,0,- = 0,-;
+  0,0,- = -,0;
   0,0,0 = 0,0;
-  0,0,1 = 0,1;
+  0,0,1 = 1,0;
   0,1,- = 0,0;
-  0,1,0 = 0,1;
-  0,1,1 = 1,-;
-  1,-,- = 0,-;
+  0,1,0 = 1,0;
+  0,1,1 = -,1;
+  1,-,- = -,0;
   1,-,0 = 0,0;
-  1,-,1 = 0,1;
+  1,-,1 = 1,0;
   1,0,- = 0,0;
-  1,0,0 = 0,1;
-  1,0,1 = 1,-;
-  1,1,- = 0,1;
-  1,1,0 = 1,-;
-  1,1,1 = 1,0;
+  1,0,0 = 1,0;
+  1,0,1 = -,1;
+  1,1,- = 1,0;
+  1,1,0 = -,1;
+  1,1,1 = 0,1;
 ];
 
-func [Trit + 1] fullAdd<Trit> (lhs [Trit], rhs [Trit], carry [Trit]) = fullAdd[lhs, rhs, carry];
+func [Trit + Carry] fullAdd<Trit> (lhs [Trit], rhs [Trit], carry [Carry]) = fullAdd[lhs, rhs, carry];
 
-template fullAddFunc<T, P> [T + 1] fullAdd<T> (lhs [T], rhs [T], carry [Trit]) = {
-  add0 = fullAdd<P>(lhs[P * 0..1 * P - 1], rhs[P * 0..1 * P - 1], carry);
-  add1 = fullAdd<P>(lhs[P * 1..2 * P - 1], rhs[P * 1..2 * P - 1], add0[0]);
-  add2 = fullAdd<P>(lhs[P * 2..3 * P - 1], rhs[P * 2..3 * P - 1], add1[1]);
-  return add2[0] & add0[1..] & add1[1..] & add2[1..];
+template fullAddFunc<T, P> [T + Carry] fullAdd<T> (lhs [T], rhs [T], carry [Carry]) = {
+  add0 = fullAdd<P>(lhs[P * 0 : P], rhs[P * 0 : P], carry);
+  add1 = fullAdd<P>(lhs[P * 1 : P], rhs[P * 1 : P], add0[P]);
+  add2 = fullAdd<P>(lhs[P * 2 : P], rhs[P * 2 : P], add1[P]);
+  return add0[0 : P] & add1[0 : P] & add2;
 };
 
 use fullAddFunc<Tryte, Trit>;
@@ -50,10 +50,10 @@ use fullAddFunc<Hash3, Hash>;
 use fullAddFunc<Hash9, Hash3>;
 use fullAddFunc<Signature, Hash9>;
 
-template fullAdd2Func<T, P> [T + 1] fullAdd<T> (lhs [T], rhs [T], carry [Trit]) = {
-  add0 = fullAdd<P>(lhs[P * 0..1 * P - 1], rhs[P * 0..1 * P - 1], carry);
-  add1 = fullAdd<P>(lhs[P * 1..2 * P - 1], rhs[P * 1..2 * P - 1], add0[0]);
-  return add1[0] & add0[1..] & add1[1..];
+template fullAdd2Func<T, P> [T + Carry] fullAdd<T> (lhs [T], rhs [T], carry [Carry]) = {
+  add0 = fullAdd<P>(lhs[P * 0 : P], rhs[P * 0 : P], carry);
+  add1 = fullAdd<P>(lhs[P * 1 : P], rhs[P * 1 : P], add0[P]);
+  return add0[0 : P] & add1;
 };
 
 use fullAdd2Func<Trit2, Trit>;

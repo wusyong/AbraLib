@@ -1,10 +1,8 @@
-import AbraLib/types;
-
 import AbraLib/halfadd;
 
 template incFunc<T> [T] inc<T> (val [T]) = {
   halfSum = halfAdd<T>(val, 1);
-  return halfSum[1..];
+  return halfSum[0 : T];
 };
 
 use incFunc<Trit>;

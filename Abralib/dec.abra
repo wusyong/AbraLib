@@ -1,10 +1,8 @@
-import AbraLib/types;
-
 import AbraLib/halfadd;
 
 template decFunc<T> [T] dec<T> (val [T]) = {
   halfSum = halfAdd<T>(val, -);
-  return halfSum[1..];
+  return halfSum[0 : T];
 };
 
 use decFunc<Trit>;

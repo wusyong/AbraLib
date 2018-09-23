@@ -532,17 +532,18 @@
          </ul>
          
       </p><br><p style="font-size: 14px; font-weight:bold"><a name="sliceExpr">sliceExpr:</a></p>
-      <img border="0" src="diagram/sliceExpr.png" height="148" width="870" usemap="#sliceExpr.map"><map name="sliceExpr.map">
+      <img border="0" src="diagram/sliceExpr.png" height="192" width="870" usemap="#sliceExpr.map"><map name="sliceExpr.map">
          <area shape="rect" coords="49,17,123,49" href="#varName" title="varName">
          <area shape="rect" coords="49,61,143,93" href="#paramName" title="paramName">
          <area shape="rect" coords="267,17,345,49" href="#fieldName" title="fieldName">
          <area shape="rect" coords="471,49,549,81" href="#constExpr" title="constExpr">
-         <area shape="rect" coords="657,113,735,145" href="#constExpr" title="constExpr"></map>
+         <area shape="rect" coords="657,113,735,145" href="#constExpr" title="constExpr">
+         <area shape="rect" coords="633,157,711,189" href="#constExpr" title="constExpr"></map>
       
       <p>
          
          <div class="ebnf"><pre><a href="#sliceExpr" title="sliceExpr" shape="rect">sliceExpr</a>
-         ::= ( <a href="#varName" title="varName" shape="rect">varName</a> | <a href="#paramName" title="paramName" shape="rect">paramName</a> ) ( '.' <a href="#fieldName" title="fieldName" shape="rect">fieldName</a> )* ( '[' <a href="#constExpr" title="constExpr" shape="rect">constExpr</a> ( '..' <a href="#constExpr" title="constExpr" shape="rect">constExpr</a>? )? ']' )?</pre></div>
+         ::= ( <a href="#varName" title="varName" shape="rect">varName</a> | <a href="#paramName" title="paramName" shape="rect">paramName</a> ) ( '.' <a href="#fieldName" title="fieldName" shape="rect">fieldName</a> )* ( '[' <a href="#constExpr" title="constExpr" shape="rect">constExpr</a> ( '..' <a href="#constExpr" title="constExpr" shape="rect">constExpr</a>? | ':' <a href="#constExpr" title="constExpr" shape="rect">constExpr</a> )? ']' )?</pre></div>
          
       </p>
       

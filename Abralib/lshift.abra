@@ -1,7 +1,7 @@
 import AbraLib/types;
 
 template lshiftFunc<T> [T] lshift<T> (val [T]) = {
-    return val[1..T - 1] & 0;
+    return val[1 : T - 1] & 0;
 };
 
 use lshiftFunc<Tryte>;

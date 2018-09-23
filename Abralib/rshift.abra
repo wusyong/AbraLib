@@ -1,7 +1,7 @@
 import AbraLib/types;
 
 template rshiftFunc<T> [T] rshift<T> (val [T]) = {
-    return 0 & val[0..T - 2];
+    return 0 & val[0 : T - 1];
 };
 
 use rshiftFunc<Tryte>;

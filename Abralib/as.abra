@@ -1,5 +1,10 @@
 import AbraLib/types;
 
+// this function can be used as a cast operator
+// for constants to cast them to specific size
+// can be handy in this case for example:
+// return f(a) & as<Tryte>(0) & f(b);
+
 template asFunc<T> [T] as<T> (val [T]) = val;
 
 use asFunc<Trit>;

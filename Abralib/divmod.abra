@@ -1,8 +1,6 @@
-import AbraLib/types;
-import AbraLib/as;
-
 import AbraLib/abs;
 import AbraLib/add;
+import AbraLib/as;
 import AbraLib/neg;
 import AbraLib/rshift;
 import AbraLib/sub;

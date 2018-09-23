@@ -32,9 +32,10 @@ type State [Hash3];
 
 func [Transaction] nullOr<Transaction>(t [Bool], val [Transaction]) = {
   // tx is signature + 6 hashes (or 2 states)
+  // note: we could also do nullOr on each separate field
   return nullOr<Signature>(t, val.signature) &
-    nullOr<State>(t, val[Signature + 0 * State..Signature + 1 * State - 1]) &
-    nullOr<State>(t, val[Signature + 1 * State..Signature + 2 * State - 1]);
+    nullOr<State>(t, val[Signature + State * 0 : State]) &
+    nullOr<State>(t, val[Signature + State * 1 : State]);
 };
 
 func [Traversal] nullOr<Traversal> (t [Bool], param [Traversal]) = {

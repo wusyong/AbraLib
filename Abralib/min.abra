@@ -1,9 +1,7 @@
-import AbraLib/types;
-
 import AbraLib/bool;
 import AbraLib/equal;
-import AbraLib/sign;
 import AbraLib/nullor;
+import AbraLib/sign;
 import AbraLib/sub;
 
 // return lhs - rhs < 0 ? lhs : rhs;

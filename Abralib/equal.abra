@@ -1,26 +1,25 @@
-import AbraLib/types;
 import AbraLib/bool;
+import AbraLib/types;
 
-// LUT logic: return a Bool trit indicating whether the two input trits are equal
-//            return (trit1 == trit2);
+// LUT logic: return (Bool) (trit1 == trit2);
 lut equal [
   -,- = 1;
-  -,0 = 0;
-  -,1 = 0;
-  0,- = 0;
+  -,0 = -;
+  -,1 = -;
+  0,- = -;
   0,0 = 1;
-  0,1 = 0;
-  1,- = 0;
-  1,0 = 0;
+  0,1 = -;
+  1,- = -;
+  1,0 = -;
   1,1 = 1;
 ];
 
 func [Bool] equal<Trit>(lhs [Trit], rhs [Trit]) = equal[lhs, rhs];
 
 template equalFunc<T, P> [Bool] equal<T>(lhs [T], rhs [T]) = {
-  return and[equal<P>(lhs[0 * P..1 * P - 1], rhs[0 * P..1 * P - 1]),
-         and[equal<P>(lhs[1 * P..2 * P - 1], rhs[1 * P..2 * P - 1]),
-             equal<P>(lhs[2 * P..3 * P - 1], rhs[2 * P..3 * P - 1])]];
+  return and3[equal<P>(lhs[P * 0 : P], rhs[P * 0 : P]),
+              equal<P>(lhs[P * 1 : P], rhs[P * 1 : P]),
+              equal<P>(lhs[P * 2 : P], rhs[P * 2 : P])];
 };
 
 use equalFunc<Tryte, Trit>;
